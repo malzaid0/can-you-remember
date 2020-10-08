@@ -1,36 +1,20 @@
 import React, { useState } from "react";
-
-// Data
-import allCards from "./data";
-
-// Utils
-import { shuffle } from "./utils";
-
-// Components
-import Card from "./Components/Card";
-
-//CSS
 import "./App.css";
+import Difficulty from "./Components/Difficulty";
+import Game from "./Components/Game";
 
-const App = () => {
-    const [cards, setCards] = useState(shuffle([...allCards, ...allCards]));
+function App() {
+    const [difficulty, setDifficulty] = useState(null);
 
-
-const cardsGrid = cards.map((card, idx) => (
-    <Card key={`${card.id}-${idx}`} card={card} />
-));
-
-return (
-    <div className="App border my-5">
-        <div className="container">
-            <div className="row">
-                <div className="col-9">
-                    <div className="row border">{cardsGrid}</div>
-                </div>
-            </div>
+    return (
+        <div className="App border my-5">
+            {difficulty ? (
+                <Game difficulty={difficulty} />
+            ) : (
+                <Difficulty setDifficulty={setDifficulty} />
+            )}
         </div>
-    </div>
-);
-};
+    );
+}
 
 export default App;
